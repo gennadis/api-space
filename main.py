@@ -14,7 +14,9 @@ SPACEX_ENDPOINTS = {
 CRS20_ID = "5eb87d42ffd86e000604b384"
 
 
-def get_image(url, dirname, filename):
+def get_image(url: str, dirname: str, filename: str) -> None:
+    """Download and save image from URL"""
+
     response = requests.get(url)
     response.raise_for_status()
 
@@ -24,12 +26,14 @@ def get_image(url, dirname, filename):
         file.write(response.content)
 
 
-def fetch_spacex_launch(launch_id: str):
+def fetch_spacex_launch(launch_id: str) -> None:
+    """Download SpaceX launch photos of a certain launch ID"""
+
     response = requests.get(
         f"{SPACEX_BASE_URL}{SPACEX_ENDPOINTS['all_launches']}/{launch_id}"
     )
     response.raise_for_status()
-    original_size_links = response.json()["links"]["flickr"]["original"]
+    original_size_links: list = response.json()["links"]["flickr"]["original"]
     for count, link in enumerate(original_size_links, start=1):
         get_image(url=link, dirname=IMAGES_DIRNAME, filename=f"spacex{count}.jpg")
 

@@ -10,6 +10,7 @@ SPACEX_ENDPOINTS = {
 
 # latest launch has no images,
 # hence using custom launch ID
+# https://en.wikipedia.org/wiki/SpaceX_CRS-20
 CRS20_ID = "5eb87d42ffd86e000604b384"
 
 
@@ -32,7 +33,9 @@ def get_spacex_links(launch_id: str) -> list:
 
 
 def main():
-    print(get_spacex_links(CRS20_ID))
+    CRS20_links = get_spacex_links(CRS20_ID)
+    for count, link in enumerate(CRS20_links, start=1):
+        get_image(url=link, dirname=IMAGES_DIRNAME, filename=f"spacex{count}.jpg")
 
 
 if __name__ == "__main__":

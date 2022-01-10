@@ -24,18 +24,18 @@ def get_image(url, dirname, filename):
         file.write(response.content)
 
 
-def get_spacex_links(launch_id: str) -> list:
+def fetch_spacex_launch(launch_id: str):
     response = requests.get(
         f"{SPACEX_BASE_URL}{SPACEX_ENDPOINTS['all_launches']}/{launch_id}"
     )
+    response.raise_for_status()
     original_size_links = response.json()["links"]["flickr"]["original"]
-    return original_size_links
+    for count, link in enumerate(original_size_links, start=1):
+        get_image(url=link, dirname=IMAGES_DIRNAME, filename=f"spacex{count}.jpg")
 
 
 def main():
-    CRS20_links = get_spacex_links(CRS20_ID)
-    for count, link in enumerate(CRS20_links, start=1):
-        get_image(url=link, dirname=IMAGES_DIRNAME, filename=f"spacex{count}.jpg")
+    fetch_spacex_launch(CRS20_ID)
 
 
 if __name__ == "__main__":

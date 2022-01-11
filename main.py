@@ -1,5 +1,9 @@
+import os
+import urllib
 import requests
 from pathlib import Path
+
+from dotenv import load_dotenv
 
 IMAGES_DIRNAME = "images"
 SPACEX_BASE_URL = "https://api.spacexdata.com"
@@ -7,7 +11,6 @@ SPACEX_ENDPOINTS = {
     "latest": "/v4/launches/latest",
     "all_launches": "/v4/launches",
 }
-
 # latest launch has no images,
 # hence using custom launch ID
 # https://en.wikipedia.org/wiki/SpaceX_CRS-20
@@ -38,8 +41,15 @@ def fetch_spacex_launch(launch_id: str) -> None:
         get_image(url=link, dirname=IMAGES_DIRNAME, filename=f"spacex{count}.jpg")
 
 
+def parse_file_extension(url: str) -> str:
+    parsed_url = urllib.parse.urlsplit(url)
+    root, extension = os.path.splitext(parsed_url.path)
+    return extension
+
+
 def main():
-    fetch_spacex_launch(CRS20_ID)
+    test_url = "https://example.com/txt/hello%20world.txt?v=9#python"
+    print(parse_file_extension(test_url))
 
 
 if __name__ == "__main__":

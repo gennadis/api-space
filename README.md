@@ -7,7 +7,6 @@ This project was built for downloading some really nice space photos.
 - Download [NASA APOD](https://apod.nasa.gov/apod/astropix.html) pictures
 - Download [NASA EPIC](https://epic.gsfc.nasa.gov/) pictures.
 
-
 ## Installation notes
 1. Clone project
 ```bash
@@ -35,3 +34,5 @@ NASA_TOKEN=place_your_token_here
 ```bash
 python main.py
 ```
+
+6. Check created ```images``` folder for downloaded photos!

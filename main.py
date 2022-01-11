@@ -2,7 +2,6 @@ import os
 import urllib
 import requests
 from pathlib import Path
-from pprint import pprint
 from dotenv import load_dotenv
 
 IMAGES_DIRNAME = "images"
@@ -16,7 +15,9 @@ SPACEX_ENDPOINTS = {
 # https://en.wikipedia.org/wiki/SpaceX_CRS-20
 CRS20_ID = "5eb87d42ffd86e000604b384"
 
-NASA_BASE_URL = "https://api.nasa.gov/planetary/apod"
+NASA_APOD_URL = "https://api.nasa.gov/planetary/apod"
+NASA_EPIC_URL = "https://api.nasa.gov/EPIC/api/natural"
+NASA_EPIC_ARCHIVE_URL = "https://api.nasa.gov/EPIC/archive/natural"
 
 
 def get_image(url: str, dirname: str, filename: str) -> None:
@@ -57,7 +58,7 @@ def fetch_nasa_apod(token: str, count: int) -> None:
         "count": count,
         "thumbs": True,
     }
-    response = requests.get(url=NASA_BASE_URL, params=params)
+    response = requests.get(url=NASA_APOD_URL, params=params)
     response.raise_for_status()
 
     astro_pictures = response.json()
@@ -77,10 +78,31 @@ def fetch_nasa_apod(token: str, count: int) -> None:
         )
 
 
+def fetch_nasa_epic(token: str) -> None:
+    """Download NASA EPIC pictures"""
+
+    params = {
+        "api_key": token,
+    }
+
+    response = requests.get(url=NASA_EPIC_URL, params=params)
+    response.raise_for_status()
+
+    earth_pictures = response.json()
+
+    for count, picture in enumerate(earth_pictures, start=1):
+        name = picture.get("image")
+        date, time = picture.get("date").split()
+        year, month, day = date.split("-")
+
+        url = f"{NASA_EPIC_ARCHIVE_URL}/{year}/{month}/{day}/png/{name}.png?api_key={token}"
+        get_image(url=url, dirname=IMAGES_DIRNAME, filename=f"epic{count}.png")
+
+
 def main():
     load_dotenv()
     nasa_token = os.getenv("NASA_TOKEN")
-    fetch_nasa_apod(nasa_token, 30)
+    fetch_nasa_epic(nasa_token)
 
 
 if __name__ == "__main__":

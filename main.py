@@ -2,7 +2,7 @@ import os
 import urllib
 import requests
 from pathlib import Path
-
+from pprint import pprint
 from dotenv import load_dotenv
 
 IMAGES_DIRNAME = "images"
@@ -15,6 +15,8 @@ SPACEX_ENDPOINTS = {
 # hence using custom launch ID
 # https://en.wikipedia.org/wiki/SpaceX_CRS-20
 CRS20_ID = "5eb87d42ffd86e000604b384"
+
+NASA_BASE_URL = "https://api.nasa.gov/planetary/apod"
 
 
 def get_image(url: str, dirname: str, filename: str) -> None:
@@ -47,9 +49,38 @@ def parse_file_extension(url: str) -> str:
     return extension
 
 
+def fetch_nasa_apod(token: str, count: int) -> None:
+    """Download NASA APOD pictures"""
+
+    params = {
+        "api_key": token,
+        "count": count,
+        "thumbs": True,
+    }
+    response = requests.get(url=NASA_BASE_URL, params=params)
+    response.raise_for_status()
+
+    astro_pictures = response.json()
+
+    urls = []
+    for picture in astro_pictures:
+        if picture.get("media_type") == "image":
+            urls.append(picture.get("url"))
+        elif picture.get("media_type") == "video":
+            urls.append(picture.get("thumbnail_url"))  # videos "url" is youtube link
+
+    for count, url in enumerate(urls, start=1):
+        get_image(
+            url=url,
+            dirname=IMAGES_DIRNAME,
+            filename=f"nasa{count}{parse_file_extension(url)}",
+        )
+
+
 def main():
-    test_url = "https://example.com/txt/hello%20world.txt?v=9#python"
-    print(parse_file_extension(test_url))
+    load_dotenv()
+    nasa_token = os.getenv("NASA_TOKEN")
+    fetch_nasa_apod(nasa_token, 30)
 
 
 if __name__ == "__main__":

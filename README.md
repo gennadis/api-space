@@ -1,11 +1,13 @@
 # Space photos donwloader
 
-This project was built for downloading some really nice space photos.
+This project was built for downloading some really nice space photos
+and publishing them to a Telegram channel.
 
 ## Features
 - Download [SpaceX](https://www.flickr.com/photos/spacex/) launch photos
 - Download [NASA APOD](https://apod.nasa.gov/apod/astropix.html) pictures
-- Download [NASA EPIC](https://epic.gsfc.nasa.gov/) pictures.
+- Download [NASA EPIC](https://epic.gsfc.nasa.gov/) pictures
+- Publish photos repeatedly to a Telegram channel
 
 ## Installation notes
 1. Clone project

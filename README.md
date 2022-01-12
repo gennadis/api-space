@@ -1,4 +1,4 @@
-# Space photos donwloader
+# Space photos Telegram bot
 This project was built for downloading some really nice space photos  
 and publishing them to a Telegram channel.
 

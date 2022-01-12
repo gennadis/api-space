@@ -1,14 +1,15 @@
 # Space photos donwloader
-
-This project was built for downloading some really nice space photos
+This project was built for downloading some really nice space photos  
 and publishing them to a Telegram channel.
 
+
 ## Features
-- Download [SpaceX](https://www.flickr.com/photos/spacex/) launch photos
+- Download [SpaceX](https://www.flickr.com/photos/spacex/) launch pictures
 - Download [NASA APOD](https://apod.nasa.gov/apod/astropix.html) pictures
 - Download [NASA EPIC](https://epic.gsfc.nasa.gov/) pictures
 - Publish photos repeatedly to a Telegram channel
-- Change photos sending delay
+- Set picture sending delay manually
+
 
 ## Installation notes
 1. Clone project
@@ -28,11 +29,11 @@ source env/bin/activate
 pip install -r requirements.txt
 ```
 
-4. Create .env file and place your Tokens in it
+4. Create .env file and fill it accordingly
 ```python
-NASA_TOKEN=place_your_token_here
-TELEGRAM_TOKEN=place_your_token_here
-TELEGRAM_CHANNEL=@place_your_channel_name_here
+NASA_TOKEN=place_token_here
+TELEGRAM_TOKEN=place_token_here
+TELEGRAM_CHANNEL=@place_channel_name_here
 ```
 
 5. Run
@@ -40,6 +41,11 @@ TELEGRAM_CHANNEL=@place_your_channel_name_here
 python main.py
 ```
 
-6. Check created ```images``` folder for downloaded photos!
+## Tips:
+- Don't forget to add your telegram bot to group admins!
 
-7. Photos sending delay is 24 Hours by default, but it can be changed in ```config.py```.
+- At `main.py` start, program will download around 50 pictures.  
+It may take some time, so please be patient. And after that,  
+telegram bot will start sending pictures to your group.
+
+- Picture sending delay is 24 hours by default, but can be changed in `config.py`

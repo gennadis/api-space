@@ -14,6 +14,6 @@ NASA_APOD_URL = "https://api.nasa.gov/planetary/apod"
 NASA_EPIC_URL = "https://api.nasa.gov/EPIC/api/natural"
 NASA_EPIC_ARCHIVE_URL = "https://api.nasa.gov/EPIC/archive/natural"
 
-# Sleep in seconds
-SLEEP_10_MINS = 600
-SLEEP_24_HOURS = 86400
+
+SLEEP_DELAY = 86400  # 24 hours
+# SLEEP_DELAY = 600  # 10 minutes

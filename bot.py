@@ -26,7 +26,7 @@ def main():
             bot=bot,
             dir_path=conf.IMAGES_DIRNAME,
             chat=os.getenv("TELEGRAM_CHANNEL"),
-            delay=conf.SLEEP_24_HOURS,
+            delay=conf.SLEEP_DELAY,
         )
 
 

@@ -13,3 +13,7 @@ CRS20_ID = "5eb87d42ffd86e000604b384"
 NASA_APOD_URL = "https://api.nasa.gov/planetary/apod"
 NASA_EPIC_URL = "https://api.nasa.gov/EPIC/api/natural"
 NASA_EPIC_ARCHIVE_URL = "https://api.nasa.gov/EPIC/archive/natural"
+
+# Sleep in seconds
+SLEEP_10_MINS = 600
+SLEEP_24_HOURS = 86400

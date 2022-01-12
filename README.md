@@ -8,6 +8,7 @@ and publishing them to a Telegram channel.
 - Download [NASA APOD](https://apod.nasa.gov/apod/astropix.html) pictures
 - Download [NASA EPIC](https://epic.gsfc.nasa.gov/) pictures
 - Publish photos repeatedly to a Telegram channel
+- Change photos sending delay
 
 ## Installation notes
 1. Clone project
@@ -27,9 +28,11 @@ source env/bin/activate
 pip install -r requirements.txt
 ```
 
-4. Create .env file and place your NASA Open API Token in it
+4. Create .env file and place your Tokens in it
 ```python
 NASA_TOKEN=place_your_token_here
+TELEGRAM_TOKEN=place_your_token_here
+TELEGRAM_CHANNEL=@place_your_channel_name_here
 ```
 
 5. Run
@@ -38,3 +41,5 @@ python main.py
 ```
 
 6. Check created ```images``` folder for downloaded photos!
+
+7. Photos sending delay is 24 Hours by default, but it can be changed in ```config.py```.

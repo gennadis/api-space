@@ -4,10 +4,13 @@ import requests
 import urllib
 
 
-def get_image(url: str, dirname: str, filename: str) -> None:
+def get_image(url: str, dirname: str, filename: str, params: dict = None) -> None:
     """Download and save image from URL given."""
 
-    response = requests.get(url)
+    if params is None:
+        params = {}
+
+    response = requests.get(url=url, params=params)
     response.raise_for_status()
 
     pathlib.Path(dirname).mkdir(exist_ok=True)

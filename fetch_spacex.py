@@ -1,6 +1,6 @@
 import requests
 
-from utils import get_image
+from utils import save_image
 
 
 def fetch_spacex_launch(
@@ -21,7 +21,7 @@ def fetch_spacex_launch(
     original_size_links: list = response.json()["links"]["flickr"]["original"]
 
     for count, link in enumerate(original_size_links, start=1):
-        get_image(url=link, dirname=dirname, filename=f"spacex{count}.jpg")
+        save_image(url=link, dirname=dirname, filename=f"spacex{count}.jpg")
 
 
 if __name__ == "__main__":

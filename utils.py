@@ -4,7 +4,7 @@ import requests
 import urllib
 
 
-def get_image(url: str, dirname: str, filename: str, params: dict = None) -> None:
+def save_image(url: str, dirname: str, filename: str, params: dict = None) -> None:
     """Download and save image from URL given."""
 
     if params is None:

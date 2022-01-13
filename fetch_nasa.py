@@ -1,6 +1,6 @@
 import requests
 
-from utils import get_image, parse_file_extension
+from utils import save_image, parse_file_extension
 
 
 def fetch_nasa_apod(token: str, base_url: str, dirname: str, count: int) -> None:
@@ -26,7 +26,7 @@ def fetch_nasa_apod(token: str, base_url: str, dirname: str, count: int) -> None
         elif picture.get("media_type") == "video":
             url = picture.get("thumbnail_url")  # videos "url" is youtube link
 
-        get_image(
+        save_image(
             url=url,
             dirname=dirname,
             filename=f"nasa_apod{count}{parse_file_extension(url)}",
@@ -54,7 +54,7 @@ def fetch_nasa_epic(token: str, base_url: str, archive_url: str, dirname: str) -
         year, month, day = date.split("-")
 
         url = f"{archive_url}/{year}/{month}/{day}/png/{name}.png"
-        get_image(
+        save_image(
             url=url, params=params, dirname=dirname, filename=f"nasa_epic{count}.png"
         )
 

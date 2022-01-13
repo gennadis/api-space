@@ -1,4 +1,5 @@
 import os
+import pathlib
 
 import telegram
 from dotenv import load_dotenv
@@ -11,6 +12,8 @@ from fetch_spacex import fetch_spacex_launch
 
 def main():
     """Download space images and start sending them to Telegram."""
+
+    pathlib.Path(conf.IMAGES_DIRNAME).mkdir(exist_ok=True)
 
     load_dotenv()
     nasa_token = os.getenv("NASA_TOKEN")

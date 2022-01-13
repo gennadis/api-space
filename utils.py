@@ -1,5 +1,4 @@
 import os
-import pathlib
 import requests
 import urllib
 
@@ -12,8 +11,6 @@ def save_image(url: str, dirname: str, filename: str, params: dict = None) -> No
 
     response = requests.get(url=url, params=params)
     response.raise_for_status()
-
-    pathlib.Path(dirname).mkdir(exist_ok=True)
 
     with open(f"{dirname}/{filename}", "wb") as file:
         file.write(response.content)

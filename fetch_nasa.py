@@ -53,8 +53,10 @@ def fetch_nasa_epic(token: str, base_url: str, archive_url: str, dirname: str) -
         date, time = picture.get("date").split()
         year, month, day = date.split("-")
 
-        url = f"{archive_url}/{year}/{month}/{day}/png/{name}.png?api_key={token}"
-        get_image(url=url, dirname=dirname, filename=f"nasa_epic{count}.png")
+        url = f"{archive_url}/{year}/{month}/{day}/png/{name}.png"
+        get_image(
+            url=url, params=params, dirname=dirname, filename=f"nasa_epic{count}.png"
+        )
 
 
 if __name__ == "__main__":

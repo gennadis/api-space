@@ -11,7 +11,3 @@ def send_photos(bot, dir_path: str, chat: str, delay: int):
                 bot.send_photo(chat_id=chat, photo=photo)
 
             sleep(delay)
-
-
-if __name__ == "__main__":
-    pass

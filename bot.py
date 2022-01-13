@@ -7,7 +7,8 @@ def send_photos(bot, dir_path: str, chat: str, delay: int):
 
     for filename in os.listdir(dir_path):
         if filename.endswith((".jpg", ".gif", ".png")):
-            bot.send_photo(chat_id=chat, photo=open(f"{dir_path}/{filename}", "rb"))
+            with open(f"{dir_path}/{filename}", "rb") as photo:
+                bot.send_photo(chat_id=chat, photo=photo)
 
             sleep(delay)
 

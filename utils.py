@@ -6,7 +6,7 @@ import urllib
 def save_image(url: str, dirname: str, filename: str, params: dict = None) -> None:
     """Download and save image from URL given."""
 
-    if params is None:
+    if not params:
         params = {}
 
     response = requests.get(url=url, params=params)
